@@ -16,6 +16,12 @@ page '/*.txt', layout: false
 # proxy "/this-page-has-no-template.html", "/template-file.html", locals: {
 #  which_fake_page: "Rendering a fake page with a local variable" }
 
+# Source needs to be in subdirectory /textile for inclusion in another site
+proxy '/index.html', '/textile/index.html', ignore: true
+data.textile.each do |slug, contents|
+  proxy "/#{slug}/index.html", '/textile/chapter', locals: contents, ignore: true
+end
+
 # General configuration
 
 # Reload the browser automatically whenever files change

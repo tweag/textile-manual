@@ -14,6 +14,19 @@
   </head>
 
   <body class="<%= page_classes %>">
+    <h1><%= current_page.data.title || title %></h1>
     <%= yield %>
+
+    <%= partial 'partials/textile_toc', locals: {contents: data.textile} %>
+  <!--- article.textile-manual
+    .row
+      .small-12.medium-9.columns
+        header.page-header
+          h1= current_page.data.title || title
+        .content
+          == yield
+      .hide-for-small-only.medium-3.columns
+      = partial 'partials/textile_toc', locals: {contents: data.textile} --->
+
   </body>
 </html>

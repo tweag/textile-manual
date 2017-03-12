@@ -1,0 +1,12 @@
+.table-of-contents
+  - if current_page.data.title.blank?
+    .strong-text Textile Reference Manual
+  ul.no-bullet
+    li= link_to 'Introduction', '/'
+    - contents.each do |slug, chapter|
+      li
+        = link_to chapter.title, "/textile/#{slug}"
+        ul
+          - chapter.sections.each do |anchor, section|
+            li= link_to section.keys.first, "/#{slug}##{anchor}"
+

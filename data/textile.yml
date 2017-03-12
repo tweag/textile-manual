@@ -1,0 +1,665 @@
+---
+:writing-paragraph-text:
+  :title: Writing Paragraph Text
+  :sections:
+    :simple-paragraphs:
+      Simple paragraphs:
+        desc: <p>Paragraphs are separated by a blank line.</p>
+        input: |-
+          This is a paragraph.
+
+          This is another paragraph
+        output: |-
+          <p>This is a paragraph.</p>
+          <p>This is another paragraph</p>
+      Explicit paragraphs:
+        desc: <p>You can explicitly identify a paragraph with <code>p. </code> (p-period-space)
+          before the paragraph.</p>
+        input: |-
+          p. This is one paragraph.
+
+          p. This is another.
+        output: |-
+          <p>This is one paragraph.</p>
+          <p>This is another.</p>
+    :line-breaks:
+      Line breaks:
+        desc: <p>Lines that don&#8217;t have a blank line in between are part of the
+          same paragraph.</p>
+        input: |-
+          Roses are red,
+          Violets are blue,
+          I'd like a sandwich;
+          Perhaps even two.
+        output: |-
+          <p>Roses are red,<br />
+          Violets are blue,<br />
+          I&#8217;d like a sandwich;<br />
+          Perhaps even two.</p>
+      Line breaks in code:
+        desc: <p>Line breaks in preformatted sections don&#8217;t become <span class="caps">HTML</span>
+          breaks.</p>
+        input: |-
+          <pre>
+          Mirror mirror
+          on the wall...
+          </pre>
+        output: |-
+          <pre>
+          Mirror mirror
+          on the wall...
+          </pre>
+    :typographers-quotes:
+      Typographer's quotes:
+        desc: <p>Straight quotation marks are converted into <abbr title='a.k.a. "curly
+          quotes"'>typographer&#8217;s quotes</abbr>, which are easier on the eyes.</p>
+        input: '"I said, ''hold the mayo'' twice!"'
+        output: <p>&#8220;I said, &#8216;hold the mayo&#8217; twice!&#8221;</p>
+      Curly apostrophes:
+        desc: <p>Apostrophes are also made curly.</p>
+        input: We went to Steven's mother's house for a party.
+        output: <p>We went to Steven&#8217;s mother&#8217;s house for a party.</p>
+    :dashes:
+      Dashes:
+        desc: <p>Single hyphens between words become en dashes; double hyphens become
+          em dashes.  Hyphenated words are left alone.</p>
+        input: I could be happy--fantastically happy--on twenty-one thousand a year
+          if I only had to work 9 am - 1 pm.
+        output: <p>I could be happy&#8212;fantastically happy&#8212;on twenty-one
+          thousand a year if I only had to work 9 am &#8211; 1 pm.</p>
+      En dash must have spaces:
+        desc: <p>A dash, when it appears between words, must be surrounded by spaces.</p>
+        input: June - July 1967
+        output: <p>June &#8211; July 1967</p>
+      Em dash spaces optional:
+        desc: |-
+          <p>Em dashes may be set open or closed.</p>
+          <blockquote cite="http://en.wikipedia.org/wiki/Dash#Em_dash">
+          <p>According to most American sources (e.g., <a href="http://en.wikipedia.org/wiki/The_Chicago_Manual_of_Style">The Chicago Manual of Style</a>) and to some British sources (e.g., <a href="http://en.wikipedia.org/wiki/Hart%27s_Rules">The Oxford Guide to Style</a>), an em dash should always be set closed (not surrounded by spaces). But the practice in many parts of the English-speaking world, also the style recommended by <a href="http://en.wikipedia.org/wiki/The_New_York_Times_Manual_of_Style_and_Usage">The New York Times Manual of Style and Usage</a>, sets it open (separates it from its surrounding words by using spaces) when it is being used parenthetically.</p>
+          </blockquote>
+        input: Please use the em dash closed--or open if you must -- but I prefer
+          it closed.
+        output: <p>Please use the em dash closed&#8212;or open if you must &#8212;
+          but I prefer it closed.</p>
+    :ellipses:
+      Ellipses:
+        desc: <p>Three periods become the ellipsis character.</p>
+        input: He thought and thought ... and then thought some more.
+        output: <p>He thought and thought &#8230; and then thought some more.</p>
+      Ellipses without leading space:
+        desc: <p>Consult your style manual for proper use of ellipses in conjunction
+          with spaces and other punctuation.</p>
+        input: '"Four score and seven years ago our fathers brought forth...a new
+          nation...dedicated to the proposition that all men are created equal...."'
+        output: <p>&#8220;Four score and seven years ago our fathers brought forth&#8230;a
+          new nation&#8230;dedicated to the proposition that all men are created equal&#8230;.&#8221;</p>
+    :dimension-sign:
+      Dimension sign:
+        desc: <p>The lowercase letter x between numbers becomes a dimension sign.</p>
+        input: 4 x 4 = 16
+        output: <p>4 &#215; 4 = 16</p>
+      Dimension with quotes:
+        desc: <p>In RedCloth, quotes may be applied to the dimensions to represent
+          feet and inches.</p>
+        input: My office measures 5' x 5'6".
+        output: <p>My office measures 5&#8242; &#215; 5&#8242;6&quot;.</p>
+      Dimension spaces optional:
+        desc: <p>Spaces between the numbers and the x are optional.</p>
+        input: 4x4=16
+        output: <p>4&#215;4=16</p>
+    :registered-trademark-and-copyright-symbols:
+      Registered, trademark, and copyright symbols:
+        desc: <p>The copyright, registered, and trademark symbols can be produced
+          by placing the letters in parentheses.</p>
+        input: RegisteredTrademark(r), Trademark(tm), and Copyright (c) 2008
+        output: <p>RegisteredTrademark&#174;, Trademark&#8482;, and Copyright &#169;
+          2008</p>
+    :acronyms:
+      Acronyms:
+        desc: <p>You can provide the definition for acronyms inside parentheses.</p>
+        input: The EPA(Environmental Protection Agency) is measuring GHG(greenhouse
+          gas) emissions.
+        output: <p>The <acronym title="Environmental Protection Agency"><span class="caps">EPA</span></acronym>
+          is measuring <acronym title="greenhouse gas"><span class="caps">GHG</span></acronym>
+          emissions.</p>
+    :uppercase:
+      Uppercase:
+        desc: <p>Uppercase words are enclosed in a span element that can be styled
+          to your liking.  Administrators can disable this feature with <code>:no_span_caps</code>.</p>
+        input: Many NASDAQ companies are ISO certified.
+        output: <p>Many <span class="caps">NASDAQ</span> companies are <span class="caps">ISO</span>
+          certified.</p>
+:page-layout:
+  :title: Page Layout
+  :sections:
+    :headings:
+      Headings:
+        desc: <p>Headings convey a hierarchy of information on the page.  They structure
+          the document like an outline. Heading 1 is the most important or general
+          and Heading 6 is the least important or most specific.  Leave a blank line
+          after every heading.</p>
+        input: |-
+          h1. This is a Heading 1
+
+          This might be an introductory paragraph on the general topic.
+
+          h2. Heading 2 gets more specific
+
+          Now we're getting into the details.
+        output: |-
+          <h1>This is a Heading 1</h1>
+          <p>This might be an introductory paragraph on the general topic.</p>
+          <h2>Heading 2 gets more specific</h2>
+          <p>Now we&#8217;re getting into the details.</p>
+    :block-quotations:
+      Block quotations:
+        desc: <p>Block quotations designate long quotations where a paragraph break
+          is appropriate.  It ends with a blank line.</p>
+        input: |-
+          Even Mr. Sedaris, a noted luddite, has finally succumbed to doing his writing on a computer.  The Internet, however, remains an idiotic trifle:
+
+          bq. I've never seen the Internet. I don't have email. I just enjoy lying on the couch and reading a magazine. When people say, "You should visit my Web page," I'm always perplexed by it. Why? What do you do there?
+
+          Haven't we all pondered that at one time or another?
+        output: |-
+          <p>Even Mr. Sedaris, a noted luddite, has finally succumbed to doing his writing on a computer.  The Internet, however, remains an idiotic trifle:</p>
+          <blockquote>
+          <p>I&#8217;ve never seen the Internet. I don&#8217;t have email. I just enjoy lying on the couch and reading a magazine. When people say, &#8220;You should visit my Web page,&#8221; I&#8217;m always perplexed by it. Why? What do you do there?</p>
+          </blockquote>
+          <p>Haven&#8217;t we all pondered that at one time or another?</p>
+      Citing block quotations:
+        desc: <p>Block quotations may include a citation <acronym title="Uniform Resource
+          Locator"><span class="caps">URL</span></acronym> immediately following the
+          period.</p>
+        input: |-
+          A standard Lorem Ipsum passage has been used since the 1500s:
+
+          bq.:http://www.lipsum.com/ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        output: |-
+          <p>A standard Lorem Ipsum passage has been used since the 1500s:</p>
+          <blockquote cite="http://www.lipsum.com/">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </blockquote>
+      Extended block quotations:
+        desc: <p>If your block quotation needs to go on for more than one paragraph,
+          use two periods.  The block quotation ends when a paragraph of a different
+          type (such as an explicit paragraph or a header) is encountered.</p>
+        input: |-
+          bq.. This is one paragraph.
+
+          Another paragraph, also part of the quote.
+
+          p. A normal paragraph ends the quote.
+        output: |-
+          <blockquote>
+          <p>This is one paragraph.</p>
+          <p>Another paragraph, also part of the quote.</p>
+          </blockquote>
+          <p>A normal paragraph ends the quote.</p>
+    :bullet-lists:
+      Bullet lists:
+        desc: <p>Make a bullet list with asterisks.  Use more asterisks to make nested
+          lists.</p>
+        input: |-
+          Textile has several advantages over HTML:
+
+          * It's easier on the eyes
+          * You don't have to write all those HTML tags
+          ** By not writing the tags yourself, you're less likely to make coding mistakes
+          ** It requires fewer keystrokes
+          *** You don't wear out the keys on your keyboard as fast
+          *** You won't wear out your fingers as fast
+          * You can write it much quicker
+        output: "<p>Textile has several advantages over <span class=\"caps\">HTML</span>:</p>\n<ul>\n\t<li>It&#8217;s
+          easier on the eyes</li>\n\t<li>You don&#8217;t have to write all those <span
+          class=\"caps\">HTML</span> tags\n\t<ul>\n\t\t<li>By not writing the tags
+          yourself, you&#8217;re less likely to make coding mistakes</li>\n\t\t<li>It
+          requires fewer keystrokes\n\t\t<ul>\n\t\t\t<li>You don&#8217;t wear out
+          the keys on your keyboard as fast</li>\n\t\t\t<li>You won&#8217;t wear out
+          your fingers as fast</li>\n\t\t</ul></li>\n\t</ul></li>\n\t<li>You can write
+          it much quicker</li>\n</ul>"
+    :numbered-lists:
+      Numbered lists:
+        desc: <p>Start each item in your numbered list with a number sign.  For nested
+          lists, use more number signs.</p>
+        input: |-
+          How to make a PB&J:
+
+          # Gather bread, peanut butter, and jelly
+          # Slice the bread if necessary
+          # Assemble the sandwich
+          ## Spread peanut butter on one slice of bread
+          ## Put jelly on another slice
+          ## Put the two slices together
+          # Enjoy
+        output: "<p>How to make a PB&amp;J:</p>\n<ol>\n\t<li>Gather bread, peanut
+          butter, and jelly</li>\n\t<li>Slice the bread if necessary</li>\n\t<li>Assemble
+          the sandwich\n\t<ol>\n\t\t<li>Spread peanut butter on one slice of bread</li>\n\t\t<li>Put
+          jelly on another slice</li>\n\t\t<li>Put the two slices together</li>\n\t</ol></li>\n\t<li>Enjoy</li>\n</ol>"
+    :mixed-nested-lists:
+      Mixed nested lists:
+        desc: <p>You can nest ordered lists inside unordered lists and vice-versa.</p>
+        input: |-
+          Three reasons to walk to work:
+
+          # It saves fuel
+          # It's good for your health
+          ** Walking burns calories
+          ** Time outside means lower stress
+          # It's good for the environment
+        output: "<p>Three reasons to walk to work:</p>\n<ol>\n\t<li>It saves fuel</li>\n\t<li>It&#8217;s
+          good for your health\n\t<ul>\n\t\t<li>Walking burns calories</li>\n\t\t<li>Time
+          outside means lower stress</li>\n\t</ul></li>\n\t<li>It&#8217;s good for
+          the environment</li>\n</ol>"
+    :definition-lists:
+      Definition lists:
+        desc: <p>Each term in a definition list starts with a dash.  Put a <code>:=</code>
+          between the term and the definition.  If your definition spans multiple
+          lines, end the definition with <code>=:</code></p>
+        input: |-
+          - coffee := Hot and black
+          - tea := Also hot, but a little less black
+          - milk :=
+          Nourishing beverage for baby cows.
+
+          Cold drink that goes great with cookies. =:
+        output: "<dl>\n\t<dt>coffee</dt>\n\t<dd>Hot and black</dd>\n\t<dt>tea</dt>\n\t<dd>Also
+          hot, but a little less black</dd>\n\t<dt>milk</dt>\n\t<dd><p>Nourishing
+          beverage for baby cows.</p>\n<p>Cold drink that goes great with cookies.</p></dd>\n</dl>"
+    :footnotes:
+      Footnotes:
+        desc: <p>To reference a footnote, place the footnote number in square brackets.
+          Don&#8217;t forget the corresponding footnote at the bottom of the page.</p>
+        input: |-
+          42.7% of all statistics are made up on the spot.[1]
+
+          fn1. "Dr. Katz":http://en.wikiquote.org/wiki/Steven_Wright
+        output: |-
+          <p>42.7% of all statistics are made up on the spot.<sup class="footnote" id="fnr1"><a href="#fn1">1</a></sup></p>
+          <p class="footnote" id="fn1"><a href="#fnr1"><sup>1</sup></a> <a href="http://en.wikiquote.org/wiki/Steven_Wright">Dr. Katz</a></p>
+    :tables:
+      Tables:
+        desc: <p>Simple tables are made by separating each cell with vertical pipes.  Begin
+          the cell with <code>_.</code> to indicate the cell is a heading.</p>
+        input: |-
+          |_. name|_. age|
+          |Walter|5|
+          |Florence|6|
+        output: "<table>\n\t<tr>\n\t\t<th>name</th>\n\t\t<th>age</th>\n\t</tr>\n\t<tr>\n\t\t<td>Walter</td>\n\t\t<td>5</td>\n\t</tr>\n\t<tr>\n\t\t<td>Florence</td>\n\t\t<td>6</td>\n\t</tr>\n</table>"
+      Table cell attributes:
+        desc: <p>You can make a table cell span rows or columns with a slash or backslash
+          and the number to span.  Classes, IDs, style, and alignment are also possible
+          on table cells as with other elements.</p>
+        input: "|{background:#ddd}. Cell with background|Normal|\n|\x02. Cell spanning
+          2 columns|\n|/2. Cell spanning 2 rows|one|\n|two|\n|>. Right-aligned cell|<.
+          Left-aligned cell|"
+        output: "<table>\n\t<tr>\n\t\t<td style=\"background:#ddd;\">Cell with background</td>\n\t\t<td>Normal</td>\n\t</tr>\n\t<tr>\n\t\t<td
+          colspan=\"2\">Cell spanning 2 columns</td>\n\t</tr>\n\t<tr>\n\t\t<td rowspan=\"2\">Cell
+          spanning 2 rows</td>\n\t\t<td>one</td>\n\t</tr>\n\t<tr>\n\t\t<td>two</td>\n\t</tr>\n\t<tr>\n\t\t<td
+          style=\"text-align:right;\">Right-aligned cell</td>\n\t\t<td style=\"text-align:left;\">Left-aligned
+          cell</td>\n\t</tr>\n</table>"
+      Table attributes:
+        desc: <p>To apply attributes to the entire table, use the <code>table.</code>
+          signature on a line by itself before the table data.</p>
+        input: |-
+          table(#prices).
+          |Adults|$5|
+          |Children|$2|
+        output: "<table id=\"prices\">\n\t<tr>\n\t\t<td>Adults</td>\n\t\t<td>$5</td>\n\t</tr>\n\t<tr>\n\t\t<td>Children</td>\n\t\t<td>$2</td>\n\t</tr>\n</table>"
+    :divisions:
+      Divisions:
+        desc: <p><code>DIV</code> tags are used to define a division or section in
+          an <span class="caps">HTML</span> document.  It has no inherent meaning,
+          but is often used by designers and developers to group or style part of
+          a page differently than another.  You can easily create a <code>div</code>
+          with Textile but most people who need a <code>div</code> just use <a href="/textile/html-integration-and-escapement/#block-html"><span
+          class="caps">HTML</span> tags</a> in their Textile.</p>
+        input: div. A simple div.
+        output: <div>A simple div.</div>
+:phrase-modifiers:
+  :title: Phrase modifiers
+  :sections:
+    :strong-importance:
+      Strong importance:
+        desc: <p>Strong importance can be given to the text by surrounding it with
+          asterisks.  The strong text is commonly styled as <b>bold</b>.</p>
+        input: Don't *ever* pull this lever.
+        output: <p>Don&#8217;t <strong>ever</strong> pull this lever.</p>
+    :stress-emphasis:
+      Stress emphasis:
+        desc: <p>To add emphasis to a stressed word or phrase, surround it with underscores.  Emphasized
+          text is typically styled as <i>italics</i>.</p>
+        input: You didn't actually _believe_ her, did you?
+        output: <p>You didn&#8217;t actually <em>believe</em> her, did you?</p>
+    :stylistic-offset:
+      Stylistic offset:
+        desc: <p>To stylistically differentiate a word or phrase from the surrounding
+          text <strong>without conveying any extra importance</strong>, place two
+          asterisks on either side.  Uses are key words in a document abstract, product
+          names in a review, or other spans of text whose typical typographic presentation
+          is boldened.</p>
+        input: |-
+          Search results for **Textile**:
+
+          h4. ["**Textile** (markup language) - Wikipedia":http://en.wikipedia.org/wiki/Textile_(markup_language)]
+
+          **Textile** is a lightweight markup language originally developed by Dean Allen and billed as a "humane Web text generator".  **Textile** converts its marked-up text ...
+        output: |-
+          <p>Search results for <b>Textile</b>:</p>
+          <h4><a href="http://en.wikipedia.org/wiki/Textile_(markup_language)"><b>Textile</b> (markup language) &#8211; Wikipedia</a></h4>
+          <p><b>Textile</b> is a lightweight markup language originally developed by Dean Allen and billed as a &#8220;humane Web text generator&#8221;.  <b>Textile</b> converts its marked-up text &#8230;</p>
+    :alternate-voice:
+      Alternate voice:
+        desc: <p>Double underscores surround a span of text in an alternate mood or
+          voice, a technical term, an idiomatic phrase from another language, a thought,
+          a ship name, or some other prose whose typical typographic presentation
+          is italicized.</p>
+        input: I just got the weirdest feeling of __déjà vu__.
+        output: <p>I just got the weirdest feeling of <i>déjà vu</i>.</p>
+    :citation:
+      Citation:
+        desc: <p>Cite the title of a work (e.g. a book, paper, essay, poem, score,
+          song, script, film, TV show, game, sculpture, painting, theater production,
+          play, opera, musical, exhibition, or anything other work whose title is
+          italicized in traditional style guides) by surrounding it with two question
+          marks on either side. This can be a work that is being quoted or referenced
+          in detail (i.e. a citation), or it can just be a work that is mentioned
+          in passing.</p>
+        input: My wife's favorite book is ??The Count of Monte Cristo?? by Dumas.
+        output: <p>My wife&#8217;s favorite book is <cite>The Count of Monte Cristo</cite>
+          by Dumas.</p>
+    :insertions-and-deletions:
+      Insertions and deletions:
+        desc: <p>To indicate a passage which has been deleted, surround it with minuses.  To
+          indicate an insertion, use pluses.</p>
+        input: The news networks declared -Al Gore- +George W. Bush+ the winner in
+          Florida.
+        output: <p>The news networks declared <del>Al Gore</del> <ins>George W. Bush</ins>
+          the winner in Florida.</p>
+      Explicit insertion and deletion:
+        desc: <p>If your insertion or deletion isn&#8217;t being recognized or is
+          being confused with another modifier, you can make it more explicit by surrounding
+          it with square brackets.</p>
+        input: '[-this was deleted-][+this was added+] to the paragraph'
+        output: <p><del>this was deleted</del><ins>this was added</ins> to the paragraph</p>
+    :superscript-and-subscript:
+      Superscript and subscript:
+        desc: <p>Superscript and subscript phrases are surrounded with caret and tilde
+          characters, respectively.</p>
+        input: |
+          f(x, n) = log ~4~ x ^n^
+        output: <p>f(x, n) = log <sub>4</sub> x <sup>n</sup></p>
+      Tight superscript and subscript:
+        desc: <p>If you want it without spaces around the super- and subscripted text,
+          use square brackets.</p>
+        input: f(x, n) = log[~4~]x[^n^]
+        output: <p>f(x, n) = log<sub>4</sub>x<sup>n</sup></p>
+    :links:
+      Links:
+        desc: <p>Links have the text of the link in quotes, followed by a colon and
+          the <span class="caps">URL</span>.</p>
+        input: Learn more "about the company":/about and our "board of directors":../about#board.
+        output: <p>Learn more <a href="/about">about the company</a> and our <a href="../about#board">board
+          of directors</a>.</p>
+      Link title:
+        desc: <p>A title may be placed in parentheses at the end of the link text.  Link
+          titles help users predict where they are going.  <a href="http://www.useit.com/alertbox/980111.html"
+          title="Nielsen&#39;s guidelines for link titles">Jakob Nielsen</a> recommends
+          you use them sparingly and not assume the user will see them at all.</p>
+        input: Visit our "parent company (Example Corporation)":http://example.com.
+        output: <p>Visit our <a href="http://example.com" title="Example Corporation">parent
+          company</a>.</p>
+      Bracketed link:
+        desc: <p>When the link isn&#8217;t surrounded by spaces or punctuation, or
+          when the <span class="caps">URL</span> ending may be ambiguous, surround
+          the link with square brackets.</p>
+        input: This is a link to a ["Wikipedia article about Textile":http://en.wikipedia.org/wiki/Textile_(markup_language)].
+        output: <p>This is a link to a <a href="http://en.wikipedia.org/wiki/Textile_(markup_language)">Wikipedia
+          article about Textile</a>.</p>
+      Link alias:
+        desc: <p>If you link to a <span class="caps">URL</span> repeatedly, you can
+          replace the <span class="caps">URL</span> with a link alias defined elsewhere
+          in the Textile document.</p>
+        input: |-
+          I'm really excited about "RedCloth":redcloth.  I love it so much, I think I'll name my first child "RedCloth":redcloth.
+
+          [redcloth]http://redcloth.org
+        output: <p>I&#8217;m really excited about <a href="http://redcloth.org">RedCloth</a>.  I
+          love it so much, I think I&#8217;ll name my first child <a href="http://redcloth.org">RedCloth</a>.</p>
+      Link attributes:
+        desc: <p>Link <a href="../attributes">attributes</a> can be specified at the
+          beginning of the link text followed by a period and space.</p>
+        input: '"(my-class). This is a link with class":http://redcloth.org'
+        output: <p><a href="http://redcloth.org" class="my-class">This is a link with
+          class</a></p>
+    :images:
+      Images:
+        desc: <p>Include an image by surrounding its <span class="caps">URL</span>
+          with exclamation marks.  Alt text can be provided in parentheses.</p>
+        input: '!http://www.w3.org/Icons/valid-html401(This page is valid HTML)!'
+        output: <p><img src="http://www.w3.org/Icons/valid-html401" title="This page
+          is valid HTML" alt="This page is valid HTML" /></p>
+      Image links:
+        desc: <p>Images can be linked by putting a colon and the link <span class="caps">URL</span>
+          after the image.</p>
+        input: '!http://www.w3.org/Icons/valid-html401!:http://validator.w3.org/check?uri=referer'
+        output: <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401"
+          alt="" /></a></p>
+:attributes:
+  :title: Attributes
+  :sections:
+    :css-classes-and-ids:
+      CSS classes and IDs:
+        desc: <p>You can apply <span class="caps">CSS</span> classes and IDs to phrase
+          modifiers or block modifiers.</p>
+        input: p(my-class). This is a paragraph that has a class and this *(#special-phrase)emphasized
+          phrase* has an id.
+        output: <p class="my-class">This is a paragraph that has a class and this
+          <strong id="special-phrase">emphasized phrase</strong> has an id.</p>
+      CSS IDs:
+        desc: ''
+        input: p(#my-paragraph). This is a paragraph that has an id.
+        output: <p id="my-paragraph">This is a paragraph that has an id.</p>
+      CSS classes and IDs combined:
+        desc: <p>You can specify both class and ID, but the class must always come
+          first.</p>
+        input: div(myclass#myid). This div has both a CSS class and ID.
+        output: <div class="myclass" id="myid">This div has both a <span class="caps">CSS</span>
+          class and ID.</div>
+    :css-styles:
+      CSS styles:
+        desc: <p>Apply <span class="caps">CSS</span> styles directly to block or phrase
+          modifiers by putting the style rules in curly braces.</p>
+        input: p{color:blue;letter-spacing:.5em}. Spacey blue
+        output: <p style="color:blue;letter-spacing:.5em;">Spacey blue</p>
+    :language:
+      Language:
+        desc: <p>Specify the language of text with square brackets.</p>
+        input: p[fr]. Parlez-vous français ?
+        output: <p lang="fr">Parlez-vous français ?</p>
+    :alignment:
+      Alignment:
+        desc: <p>Text inside blocks can be aligned in four ways:</p>
+        input: |-
+          p<. align left
+
+          p>. align right
+
+          p=. centered
+
+          p<>. justified justified justified justified justified justified justified justified justified
+        output: |-
+          <p style="text-align:left;">align left</p>
+          <p style="text-align:right;">align right</p>
+          <p style="text-align:center;">centered</p>
+          <p style="text-align:justify;">justified justified justified justified justified justified justified justified justified</p>
+    :indentation:
+      Indentation:
+        desc: <p>Text can be indented with single parentheses.  For each left paren,
+          left pad 1em.  For each right paren, right pad 1em.  They may be combined
+          for left and right padding.</p>
+        input: |-
+          p(. Left pad 1em.
+
+          p)). Right pad 2em.
+
+          p(). Pad both left and right sides 1em.
+        output: |-
+          <p style="padding-left:1em;">Left pad 1em.</p>
+          <p style="padding-right:2em;">Right pad 2em.</p>
+          <p style="padding-left:1em;padding-right:1em;">Pad both left and right sides 1em.</p>
+:html-integration-and-escapement:
+  :title: HTML Integration and Escapement
+  :sections:
+    :html-spans:
+      HTML spans:
+        desc: <p>You can enclose a bit of text in an <span class="caps">HTML</span>
+          span tag by enclosing it in percent signs.  Then you can apply attributes
+          to the span (see <a href="/textile/attributes">attributes</a>).</p>
+        input: I can put in a %(myclass)span with a class% like this.
+        output: <p>I can put in a <span class="myclass">span with a class</span> like
+          this.</p>
+    :inline-code:
+      Inline code:
+        desc: <p>To mark code in your text, surround the code with at signs.</p>
+        input: On the command line, you can just type @redcloth@.
+        output: <p>On the command line, you can just type <code>redcloth</code>.</p>
+    :block-code:
+      Block code:
+        desc: <p>You can insert a block of code with the <code>bc.</code> block signature.</p>
+        input: |-
+          bc. # Output "I love Ruby"
+          say = "I love Ruby"
+          puts say
+        output: |-
+          <pre><code># Output "I love Ruby"
+          say = "I love Ruby"
+          puts say</code></pre>
+      Extended block code:
+        desc: <p>Use <code>bc..</code> and the block of code will continue to include
+          blank lines until it encounters another block signature such as <code>p.</code></p>
+        input: |-
+          bc.. # Output "I love Ruby"
+          say = "I love Ruby"
+          puts say
+
+          # Output "I *LOVE* RUBY"
+          say['love'] = "*love*"
+          puts say.upcase
+
+          p. And that is how you do it.
+        output: |-
+          <pre><code># Output "I love Ruby"
+          say = "I love Ruby"
+          puts say</code>
+
+          <code># Output "I *LOVE* RUBY"
+          say['love'] = "*love*"
+          puts say.upcase</code></pre>
+          <p>And that is how you do it.</p>
+    :inline-html:
+      Inline HTML:
+        desc: <p>You can use <span class="caps">HTML</span> right in your paragraph
+          text, presuming the site administrator has not set :filter_html or :sanitize_html
+          restrictions.</p>
+        input: I can use HTML directly in my <span class="youbetcha">Textile</span>.
+        output: <p>I can use <span class="caps">HTML</span> directly in my <span class="youbetcha">Textile</span>.</p>
+    :block-html:
+      Block HTML:
+        desc: <p>You can use <span class="caps">HTML</span> freely within your RedCloth
+          4 Textile.  <span class="caps">HTML</span> tags on a line by themselves
+          will not be mangled.  Don&#8217;t forget to leave a blank line after any
+          Textile, just like usual.</p>
+        input: |-
+          <div id="shopping-cart">
+          <form action="/" method="get">
+          h3. Your cart
+
+          * Item one
+          * Item two
+
+          <p><input type="submit" value="Check Out" /></p>
+
+          </form>
+          </div>
+        output: "<div id=\"shopping-cart\">\n<form action=\"/\" method=\"get\">\n<h3>Your
+          cart</h3>\n<ul>\n\t<li>Item one</li>\n\t<li>Item two</li>\n</ul>\n<p><input
+          type=\"submit\" value=\"Check Out\" /></p>\n</form>\n</div>"
+    :no-textile:
+      No Textile:
+        desc: <p>You can have RedCloth skip a chunk of text with the <code>&lt;notextile&gt;</code>
+          tag or double-equals.</p>
+        input: |-
+          <notextile>
+          Don't touch this!
+          </notextile>
+
+          Use ==*asterisks*== to say something *strongly*.
+        output: |-
+          Don't touch this!
+          <p>Use *asterisks* to say something <strong>strongly</strong>.</p>
+      Notextile block:
+        desc: <p>Notextile can also be used as a normal or extended Textile block.</p>
+        input: |-
+          notextile. This has *no* textile formatting, see?
+
+          notextile.. And this notextile block
+
+          Just keeps going and going.
+
+          p. Until you end it with another block.
+        output: |-
+          This has *no* textile formatting, see?
+
+          And this notextile block
+
+          Just keeps going and going.<p>Until you end it with another block.</p>
+    :preformatted-text:
+      Preformatted text:
+        desc: <p>Preformatted text can be put in a <code>pre.</code> block and its
+          whitespace will be preserved.  <code>pre.</code> is almost identical to
+          <code>bc.</code>, except that <code>&lt;code&gt;...&lt;/code&gt;</code>
+          tags are not used within the <code>&lt;pre&gt;</code> block.</p>
+        input: |-
+          pre.      Text in a pre block
+          is displayed in a fixed-width
+               font. It preserves
+            s p a c e s, line breaks
+               and ascii bunnies.
+                    _     _
+                    \`\ /`/
+                     \ V /
+                     /. .\
+                    =\ T /=
+                     / ^ \
+                  {}/\\ //\
+                  __\ " " /__
+                 (____/^\____)
+        output: |-
+          <pre>     Text in a pre block
+          is displayed in a fixed-width
+               font. It preserves
+            s p a c e s, line breaks
+               and ascii bunnies.
+                    _     _
+                    \`\ /`/
+                     \ V /
+                     /. .\
+                    =\ T /=
+                     / ^ \
+                  {}/\\ //\
+                  __\ " " /__
+                 (____/^\____)</pre>
+      Extended preformatted:
+        desc: <p>Use <code>pre..</code> to make a block of extended preformatted text
+          that continues until it encounters another block signature, like <code>p.</code></p>
+        input: |-
+          pre.. All monospaced
+
+          Even the blank lines
+
+          p. But now a paragraph
+        output: |-
+          <pre>All monospaced</pre>
+          <pre>Even the blank lines</pre>
+          <p>But now a paragraph</p>

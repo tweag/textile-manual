@@ -1,0 +1,11 @@
+---
+title: "<strong>Textile</strong> Reference Manual"
+---
+
+**Textile** is a simple text markup language that makes it easy to structure content for blogs, wikis, and documentation.
+
+This guide presumes no knowledge of HTML(Hyper Text Markup Language), though you may certainly use it if what you want to accomplish is more complex than Textile allows.
+
+*To get started learning Textile*, begin with "Writing Paragraph Text":/textile/writing-paragraph-text/ in the table of contents at right. In each section of the manual, examples clearly illustrate the rules of Textile. In each example, the Textile markup is followed by how the HTML appears in the browser.
+
+This guide is the **official Textile reference manual for "RedCloth 4":http://redcloth.org/**.  The examples shown here may not work properly on prior versions of RedCloth or other Textile processors.  It doesn't document everything that's possible with RedCloth.  For detailed usage examples, see the "specs":http://github.com/jgarber/redcloth/tree/master/spec/fixtures or simply try it out on the "Try RedCloth":/try-redcloth/ page or using the @redcloth@ binary included with the source code.  If you notice errors and omissions in this manual, please submit an issue or pull request.

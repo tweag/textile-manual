@@ -1,0 +1,24 @@
+- set_page_title("#{title} | Textile Reference Manual")
+- sections.each do |slug, examples|
+  h2 id=slug = examples.keys.first
+  .example class=slug
+    - examples.each do |_, example|
+      .desc= example.desc
+
+      .row
+        .medium-6.columns
+          .input
+            .type Textile
+            = code('textile') do
+              = example.input
+        .medium-6.columns
+          .output
+            .type Browser
+            = example.output
+      .row
+        .medium-12.columns
+          .html
+            .type HTML
+            = code('html') do
+              = example.output
+
