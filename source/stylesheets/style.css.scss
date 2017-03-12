@@ -1,0 +1,27 @@
+@import 'foundation';
+@include foundation-everything;
+@import 'settings';
+@import 'highlighting';
+
+pre code {
+  display: block;
+}
+
+.type {
+  font-size: small;
+  font-weight: bold;
+}
+
+.input, .html {
+  margin-bottom: 1rem;
+}
+
+.table-of-contents {
+  ul ul {
+    padding-left: 2rem;
+    list-style-type: circle;
+  }
+  .strong-text {
+    font-weight: 600;
+  }
+}

@@ -5,7 +5,7 @@
     li= link_to 'Introduction', '/'
     - contents.each do |slug, chapter|
       li
-        = link_to chapter.title, "/textile/#{slug}"
+        = link_to chapter.title, "/#{slug}"
         ul
           - chapter.sections.each do |anchor, section|
             li= link_to section.keys.first, "/#{slug}##{anchor}"
