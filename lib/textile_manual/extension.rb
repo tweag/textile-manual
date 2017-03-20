@@ -27,7 +27,9 @@ class TextileManual < ::Middleman::Extension
 
     new_resources << root_resource
 
-    resources + new_resources
+    new_resources.reduce(resources) do |sum, r|
+      r.execute_descriptor(app, sum)
+    end
   end
 
   def add_extension_dirs
@@ -45,7 +47,7 @@ class TextileManual < ::Middleman::Extension
   private
 
   def link(slug=nil)
-    Middleman::Util::normalize_path(File.join([@base_path, slug, 'index.html'].compact))
+    File.join([@base_path, slug, 'index.html'].compact)
   end
 
   def root_resource
@@ -53,8 +55,35 @@ class TextileManual < ::Middleman::Extension
   end
 
   def build_proxy_resource(path, locals, template='textile_manual/chapter')
-    ::Middleman::Sitemap::ProxyResource.new(@sitemap, path, template).tap do |p|
-      p.add_metadata locals: locals
-    end
+    ProxyDescriptor.new(
+      ::Middleman::Util.normalize_path(path),
+      template,
+      { locals: locals,
+        ignore: true }
+    )
   end
+
+   ProxyDescriptor = Struct.new(:path, :target, :metadata) do
+     def execute_descriptor(app, resources)
+       md = metadata.dup
+       should_ignore = md.delete(:ignore)
+
+       page_data = md.delete(:data) || {}
+       page_data[:id] = md.delete(:id) if md.key?(:id)
+
+       r = ::Middleman::Sitemap::ProxyResource.new(app.sitemap, path, target)
+       r.add_metadata(
+         locals: md.delete(:locals) || {},
+         page: page_data || {},
+         options: md
+       )
+
+       if should_ignore
+         d = ::Middleman::Sitemap::Extensions::Ignores::StringIgnoreDescriptor.new(target)
+         d.execute_descriptor(app, resources)
+       end
+
+       resources + [r]
+     end
+   end
 end
