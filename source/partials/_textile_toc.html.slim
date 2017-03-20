@@ -2,11 +2,11 @@
   - if current_page.data.title.blank?
     .strong-text Textile Reference Manual
   ul.no-bullet
-    li= link_to 'Introduction', '/'
+    li= link_to 'Introduction', textile_manual_link(nil)
     - contents.each do |slug, chapter|
       li
-        = link_to chapter.title, "/#{slug}"
+        = link_to chapter.title, textile_manual_link(slug)
         ul
           - chapter.sections.each do |anchor, section|
-            li= link_to section.keys.first, "/#{slug}##{anchor}"
+            li= link_to section.keys.first, textile_manual_link("#{slug}##{anchor}")
 

@@ -1,9 +1,4 @@
-# Source needs to be in subdirectory /textile for inclusion in another site
-proxy '/index.html', '/textile/index.html', ignore: true
-data.textile.each do |slug, contents|
-  proxy "/#{slug}/index.html", '/textile/chapter', locals: contents, ignore: true
-end
-
+activate :textile_manual
 activate :syntax, line_numbers: false
 
 ###
