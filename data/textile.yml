@@ -329,8 +329,8 @@
       Stress emphasis:
         desc: <p>To add emphasis to a stressed word or phrase, surround it with underscores.  Emphasized
           text is typically styled as <i>italics</i>.</p>
-        input: You didn't actually _believe_ her, did you?
-        output: <p>You didn&#8217;t actually <em>believe</em> her, did you?</p>
+        input: You didn't actually _believe_ it, did you?
+        output: <p>You didn&#8217;t actually <em>believe</em> it, did you?</p>
     :stylistic-offset:
       Stylistic offset:
         desc: <p>To stylistically differentiate a word or phrase from the surrounding
